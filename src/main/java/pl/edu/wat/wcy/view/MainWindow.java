@@ -102,9 +102,9 @@ public class MainWindow extends JFrame{
         for (CheckBoxPanel c : checkBoxPanelList) {
             Checkbox checkbox = new Checkbox();
             checkbox.setPath(browseWindowList.get(i).getPath());
-            checkbox.setState(state);
             checkbox.setHorizontal(c.getHorizontalValue());
             checkbox.setVertical(c.getVerticalValue());
+            checkbox.setState(state);
             checkboxDao.create(checkbox);
             i++;
         }

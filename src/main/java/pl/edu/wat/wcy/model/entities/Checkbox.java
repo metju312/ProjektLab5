@@ -7,9 +7,9 @@ import java.io.Serializable;
 @Entity
 public class Checkbox implements Serializable {
     private int id;
+    private String path;
     private boolean horizontal;
     private boolean vertical;
-    private String path;
     private State state;
 
 
@@ -27,6 +27,14 @@ public class Checkbox implements Serializable {
         this.id = id;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public boolean isHorizontal() {
         return horizontal;
     }
@@ -41,14 +49,6 @@ public class Checkbox implements Serializable {
 
     public void setVertical(boolean vertical) {
         this.vertical = vertical;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
