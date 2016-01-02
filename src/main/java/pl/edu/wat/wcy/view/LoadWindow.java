@@ -85,7 +85,7 @@ public class LoadWindow extends JDialog {
         //scrollPane.removeAll();
         scrollPane.remove(listPanel);
         scrollPane.add(generateLoadStatesPanel());
-        scrollPane.getViewport().revalidate();
+        //scrollPane.getViewport().revalidate();
 //        revalidate();
 //        repaint();
 
