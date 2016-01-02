@@ -2,7 +2,7 @@ package pl.edu.wat.wcy.view;
 
 import javax.swing.*;
 
-public class Window extends JFrame implements IWindow {
+public abstract class Window extends JFrame implements IWindow {
 
     protected JPanel mainPanel;
     private JScrollPane pane;
@@ -14,8 +14,6 @@ public class Window extends JFrame implements IWindow {
         setSize(320, 130);
         setVisible(true);
     }
-
-
 
     @Override
     public JPanel getMainPanel() {
@@ -41,10 +39,5 @@ public class Window extends JFrame implements IWindow {
     @Override
     public boolean hasScrollPane() {
         return pane != null;
-    }
-
-    @Override
-    public String getPath() {
-        return null;
     }
 }

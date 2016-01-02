@@ -54,6 +54,6 @@ public abstract class DecoratorJFrame implements IWindow {
 
     @Override
     public String getPath() {
-        return null;
+        return window.getPath();
     }
 }
