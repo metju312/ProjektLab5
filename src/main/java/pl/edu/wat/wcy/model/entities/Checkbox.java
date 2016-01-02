@@ -6,13 +6,10 @@ import java.io.Serializable;
 
 @Entity
 public class Checkbox implements Serializable {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private boolean horizontal;
     private boolean vertical;
     private String path;
-    @Column(length=1000000)
     private State state;
 
 
@@ -20,6 +17,8 @@ public class Checkbox implements Serializable {
         super();
     }
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public int getId() {
         return id;
     }

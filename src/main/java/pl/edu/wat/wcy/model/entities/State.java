@@ -8,18 +8,17 @@ import java.util.List;
 
 @Entity
 public class State implements Serializable {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     private String date;
     private String path;
-    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
     private List<Checkbox> checkboxList = new ArrayList<>();
 
     public State() {
         super();
     }
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -44,6 +43,7 @@ public class State implements Serializable {
         this.path = path;
     }
 
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
     public List<Checkbox> getCheckboxList() {
         return checkboxList;
     }
