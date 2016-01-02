@@ -43,7 +43,7 @@ public class State implements Serializable {
         this.path = path;
     }
 
-    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public List<Checkbox> getCheckboxList() {
         return checkboxList;
     }

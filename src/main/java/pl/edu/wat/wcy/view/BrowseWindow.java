@@ -89,7 +89,7 @@ public class BrowseWindow extends Window {
         setSize(320, 130);
     }
 
-    private void buildJTextFieldWithLength(int length) {
+    private void buildJTextFieldWithLength(int length){
         jTextField = new JTextField(length);
         jTextField.setMaximumSize(new Dimension(200, 40));
     }
@@ -112,7 +112,7 @@ public class BrowseWindow extends Window {
     }
 
     @Override
-    public void enrichBrowseWindowList() {
-        mainWindow.browseWindowList.add(this);
+    public String getPath() {
+        return "" + jTextField.getText();
     }
 }

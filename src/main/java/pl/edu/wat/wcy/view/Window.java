@@ -15,10 +15,7 @@ public class Window extends JFrame implements IWindow {
         setVisible(true);
     }
 
-    @Override
-    public void enrichBrowseWindowList() {
 
-    }
 
     @Override
     public JPanel getMainPanel() {
@@ -44,5 +41,10 @@ public class Window extends JFrame implements IWindow {
     @Override
     public boolean hasScrollPane() {
         return pane != null;
+    }
+
+    @Override
+    public String getPath() {
+        return null;
     }
 }

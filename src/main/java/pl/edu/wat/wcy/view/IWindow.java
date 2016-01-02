@@ -15,5 +15,5 @@ public interface IWindow {
 
     boolean hasScrollPane();
 
-    void enrichBrowseWindowList();
+    String getPath();
 }

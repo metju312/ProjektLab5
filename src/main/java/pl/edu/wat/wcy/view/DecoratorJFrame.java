@@ -53,7 +53,7 @@ public abstract class DecoratorJFrame implements IWindow {
     }
 
     @Override
-    public void enrichBrowseWindowList() {
-
+    public String getPath() {
+        return null;
     }
 }

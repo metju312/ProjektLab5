@@ -25,7 +25,7 @@ public class MainWindow extends JFrame{
     private JButton generateCheckBoxesButton;
     private JPanel checkBoxPanel;
     private java.util.List<CheckBoxPanel> checkBoxPanelList;
-    public java.util.List<BrowseWindow> browseWindowList;
+    public List<IWindow> browseWindowList = new ArrayList<>();
     public List<State> stateList;
 
     private JButton saveButton;
@@ -97,18 +97,16 @@ public class MainWindow extends JFrame{
         stateDao.create(state);
         updateStateList();
         CheckboxDao checkboxDao = new CheckboxDao();
-        Checkbox checkbox;
 
+        int i = 0;
         for (CheckBoxPanel c : checkBoxPanelList) {
-            checkbox = new Checkbox();
-            //System.out.println("id: " + stateList.get(0).getId());
-            System.out.println();
-            checkbox.setState(stateList.get(0));
-            checkbox.setHorizontal(c.horizontalBar.isSelected());
-            checkbox.setVertical(c.verticalBar.isSelected());
-            checkbox.setPath("1");
-            //checkbox.setPath(browseWindowList.get(i).jTextField.getText());
+            Checkbox checkbox = new Checkbox();
+            checkbox.setPath(browseWindowList.get(i).getPath());
+            checkbox.setState(state);
+            checkbox.setHorizontal(c.getHorizontalValue());
+            checkbox.setVertical(c.getVerticalValue());
             checkboxDao.create(checkbox);
+            i++;
         }
 
     }
@@ -249,15 +247,18 @@ public class MainWindow extends JFrame{
             IWindow browseWindow;
             if (checkBoxPanelList.get(i).horizontalBar.isSelected() && checkBoxPanelList.get(i).verticalBar.isSelected()) {
                 browseWindow = new HorizontalBarDecorator(new VerticalBarDecorator(new BrowseWindow(this)));
+                browseWindowList.add(browseWindow);
             } else if (checkBoxPanelList.get(i).horizontalBar.isSelected()) {
                 browseWindow = new HorizontalBarDecorator(new BrowseWindow(this));
+                browseWindowList.add(browseWindow);
             } else if (checkBoxPanelList.get(i).verticalBar.isSelected()) {
                 browseWindow = new VerticalBarDecorator(new BrowseWindow(this));
+                browseWindowList.add(browseWindow);
             } else {
                 browseWindow = new BrowseWindow(this);
+                browseWindowList.add(browseWindow);
             }
             browseWindow.setLocation(x + countX * 320, y + countY * 130);
-            //browseWindow.enrichBrowseWindowList();
 
             countY++;
             if (countY == 5) {

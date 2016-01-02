@@ -43,4 +43,12 @@ public class CheckBoxPanel extends JPanel {
         panel.add(new JLabel("Horizontal Bar"));
         return panel;
     }
+
+    public boolean getHorizontalValue(){
+        return horizontalBar.isSelected();
+    }
+
+    public boolean getVerticalValue(){
+        return verticalBar.isSelected();
+    }
 }
