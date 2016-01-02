@@ -1,6 +1,7 @@
 package pl.edu.wat.wcy.view;
 
 import net.miginfocom.swing.MigLayout;
+import pl.edu.wat.wcy.model.dao.StateDao;
 import pl.edu.wat.wcy.model.entities.State;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class LoadWindow extends JDialog {
 
     private MainWindow mainWindow;
     private JScrollPane scrollPane;
+    private JPanel listPanel;
 
     public LoadWindow(MainWindow mainWindow) {
         super(mainWindow, "Load Window", true);
@@ -35,19 +37,19 @@ public class LoadWindow extends JDialog {
     }
 
     private JPanel generateLoadStatesPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new MigLayout());
-        panel.add(generateNewStatePanel(), "wrap");
+        listPanel = new JPanel();
+        listPanel.setLayout(new MigLayout());
+        listPanel.add(generateNewStatePanel(), "wrap");
         for (State state : mainWindow.stateList) {
-            panel.add(generatePanelForState(state), "wrap");
+            listPanel.add(generatePanelForState(state), "wrap");
         }
-        return panel;
+        return listPanel;
     }
 
     private JPanel generatePanelForState(State state) {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
-        label.setText(state.getPath());
+        label.setText(state.getDate());
 
         JButton load = new JButton("load");
         load.addActionListener(new ActionListener() {
@@ -62,7 +64,10 @@ public class LoadWindow extends JDialog {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                StateDao stateDao = new StateDao();
+                stateDao.delete(state.getId());
+                mainWindow.updateStateList();
+                revalidateLoadWindow();
             }
         });
 
@@ -71,6 +76,19 @@ public class LoadWindow extends JDialog {
         panel.add(load);
         panel.add(delete);
         return panel;
+    }
+
+    private void revalidateLoadWindow() {
+        //this.removeAll();
+        //add(generateScrollPane());
+
+        //scrollPane.removeAll();
+        scrollPane.remove(listPanel);
+        scrollPane.add(generateLoadStatesPanel());
+        scrollPane.getViewport().revalidate();
+//        revalidate();
+//        repaint();
+
     }
 
     private void setLoadWindowLayout() {
@@ -82,8 +100,8 @@ public class LoadWindow extends JDialog {
     }
 
     private void setLoadWindowValues() {
-        setLocationRelativeTo(null);
-        setSize(320, 300);
+        //setLocationRelativeTo(null);
+        setSize(340, 400);
     }
 
 

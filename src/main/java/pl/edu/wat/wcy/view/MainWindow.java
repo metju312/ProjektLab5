@@ -276,11 +276,15 @@ public class MainWindow extends JFrame{
         mosaicWindow.loadFile(path);
         mosaicWindow.setImageToPaint();
         mosaicWindow.repaint();
-        System.out.println("painting mosaic from:" + path);
     }
 
     public void updateStateList(){
         StateDao stateDao = new StateDao();
         stateList = stateDao.findAll();
+        System.out.println("Actual stateList: ");
+        for (State state : stateList) {
+            System.out.println(state.getDate());
+        }
+
     }
 }
