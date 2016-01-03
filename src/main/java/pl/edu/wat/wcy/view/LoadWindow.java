@@ -95,6 +95,7 @@ public class LoadWindow extends JDialog {
 
     private void loadState(State state) {
         mainWindow.resetMainWindow();
+        mainWindow.setBrowseWindowList();
         List<Checkbox> checkBoxList = generateNewCheckBoxListBasedOnState(state);
         mainWindow.textField.setText("" + checkBoxList.size());
         mainWindow.generateNCheckBoxPanels(checkBoxList.size());
@@ -104,8 +105,9 @@ public class LoadWindow extends JDialog {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        mainWindow.generateNBrowseWindows(checkBoxList.size());
+        mainWindow.setBrowseWindowsPaths(checkBoxList);
+        mainWindow.saveButton.setEnabled(true);
         closeLoadWindow();
     }
 

@@ -17,5 +17,8 @@ public interface IWindow {
 
     String getPath();
 
+    void setPath(String path);
+
     void disposeMe();
+
 }

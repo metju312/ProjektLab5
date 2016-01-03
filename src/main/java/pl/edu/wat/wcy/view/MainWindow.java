@@ -25,10 +25,10 @@ public class MainWindow extends JFrame{
     private JButton generateCheckBoxesButton;
     private JPanel checkBoxPanel;
     public java.util.List<CheckBoxPanel> checkBoxPanelList;
-    public List<IWindow> browseWindowList = new ArrayList<>();
+    public List<IWindow> browseWindowList;
     public List<State> stateList;
 
-    private JButton saveButton;
+    public JButton saveButton;
     private JButton loadButton;
 
     private LoadWindow loadWindow;
@@ -58,11 +58,16 @@ public class MainWindow extends JFrame{
 
         setMainWindowValues();
         setMainWindowLayout();
+        setBrowseWindowList();
         add(inputPanel());
         add(statePanel());
         add(checkBoxPanel());
         add(generateBrowseWindowsButtonPanel());
         addMosaicWindow();
+    }
+
+    public void setBrowseWindowList() {
+        browseWindowList = new ArrayList<>();
     }
 
     private JPanel statePanel() {
@@ -232,7 +237,7 @@ public class MainWindow extends JFrame{
         setLocationRelativeTo(null);
     }
 
-    private void generateNBrowseWindows(Integer numberOfBrowseWindowsToGenerate) {
+    public void generateNBrowseWindows(Integer numberOfBrowseWindowsToGenerate) {
         int x = 0;
         int y = 0;
         int countX = 0;
@@ -296,7 +301,7 @@ public class MainWindow extends JFrame{
 
     }
 
-    private void closeBrowseWindows() {
+    public void closeBrowseWindows() {
         for (IWindow window : browseWindowList) {
             window.disposeMe();
         }
@@ -307,6 +312,14 @@ public class MainWindow extends JFrame{
         for (CheckBoxPanel panel : checkBoxPanelList) {
             panel.horizontalBar.setSelected(checkBoxList.get(i).isHorizontal());
             panel.verticalBar.setSelected(checkBoxList.get(i).isVertical());
+            i++;
+        }
+    }
+
+    public void setBrowseWindowsPaths(List<Checkbox> checkBoxList) {
+        int i = 0;
+        for (IWindow window : browseWindowList) {
+            window.setPath(checkBoxList.get(i).getPath());
             i++;
         }
     }
