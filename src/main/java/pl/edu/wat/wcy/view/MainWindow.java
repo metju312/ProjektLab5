@@ -20,9 +20,9 @@ public class MainWindow extends JFrame{
     public int mainWindowHeight = 600;
 
     public JTextField textField;
-    private JButton generateBrowseWindowsButton;
+    public JButton generateBrowseWindowsButton;
     private MosaicWindow mosaicWindow;
-    private JButton generateCheckBoxesButton;
+    public JButton generateCheckBoxesButton;
     private JPanel checkBoxPanel;
     public java.util.List<CheckBoxPanel> checkBoxPanelList;
     public List<IWindow> browseWindowList;
@@ -30,8 +30,6 @@ public class MainWindow extends JFrame{
 
     public JButton saveButton;
     private JButton loadButton;
-
-    private LoadWindow loadWindow;
 
     public static MainWindow getInstance() {
         if (instance == null) {
@@ -42,9 +40,20 @@ public class MainWindow extends JFrame{
 
     private MainWindow() {
         super("Main Window");
+        setLookAndFeel();
+        setMainWindowValues();
+        setMainWindowLayout();
+        setBrowseWindowList();
 
+        add(inputPanel());
+        add(statePanel());
+        add(checkBoxPanel());
+        add(generateBrowseWindowsButtonPanel());
+        addMosaicWindow();
+    }
+
+    private void setLookAndFeel() {
         try {
-            //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -55,15 +64,6 @@ public class MainWindow extends JFrame{
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
-        setMainWindowValues();
-        setMainWindowLayout();
-        setBrowseWindowList();
-        add(inputPanel());
-        add(statePanel());
-        add(checkBoxPanel());
-        add(generateBrowseWindowsButtonPanel());
-        addMosaicWindow();
     }
 
     public void setBrowseWindowList() {
@@ -127,7 +127,7 @@ public class MainWindow extends JFrame{
     }
 
     private void generateLoadWindow() {
-        loadWindow = new LoadWindow(this);
+        new LoadWindow(this);
     }
 
     private JPanel generateBrowseWindowsButtonPanel() {
@@ -220,6 +220,10 @@ public class MainWindow extends JFrame{
                     generateCheckBoxesButton.setEnabled(false);
                     textField.setEnabled(false);
                     saveButton.setEnabled(true);
+                    for (CheckBoxPanel panel : checkBoxPanelList) {
+                        panel.horizontalBar.setEnabled(false);
+                        panel.verticalBar.setEnabled(false);
+                    }
                 } catch (NumberFormatException e1) {
                     e1.printStackTrace();
                 }
@@ -296,6 +300,7 @@ public class MainWindow extends JFrame{
         add(checkBoxPanel());
         add(generateBrowseWindowsButtonPanel());
         addMosaicWindow();
+        generateBrowseWindowsButton.setEnabled(true);
         this.revalidate();
         this.repaint();
 

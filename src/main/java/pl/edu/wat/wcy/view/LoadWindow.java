@@ -108,6 +108,13 @@ public class LoadWindow extends JDialog {
         mainWindow.generateNBrowseWindows(checkBoxList.size());
         mainWindow.setBrowseWindowsPaths(checkBoxList);
         mainWindow.saveButton.setEnabled(true);
+        mainWindow.textField.setEnabled(false);
+        mainWindow.generateCheckBoxesButton.setEnabled(false);
+        mainWindow.generateBrowseWindowsButton.setEnabled(false);
+        for (CheckBoxPanel panel : mainWindow.checkBoxPanelList) {
+            panel.horizontalBar.setEnabled(false);
+            panel.verticalBar.setEnabled(false);
+        }
         closeLoadWindow();
     }
 
