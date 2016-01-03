@@ -17,14 +17,14 @@ public class MainWindow extends JFrame{
     private static MainWindow instance = null;
 
     public int mainWindowWidth = 400;
-    public int mainWindowHeight = 500;
+    public int mainWindowHeight = 600;
 
-    private JTextField textField;
+    public JTextField textField;
     private JButton generateBrowseWindowsButton;
     private MosaicWindow mosaicWindow;
     private JButton generateCheckBoxesButton;
     private JPanel checkBoxPanel;
-    private java.util.List<CheckBoxPanel> checkBoxPanelList;
+    public java.util.List<CheckBoxPanel> checkBoxPanelList;
     public List<IWindow> browseWindowList = new ArrayList<>();
     public List<State> stateList;
 
@@ -184,11 +184,6 @@ public class MainWindow extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     generateNCheckBoxPanels(Integer.parseInt(textField.getText()));
-
-                    mainWindowHeight += 90;
-                    setSize(mainWindowWidth, mainWindowHeight);
-                    centerWindow();
-
                     textField.setEnabled(false);
                     generateCheckBoxesButton.setEnabled(false);
                     checkBoxPanel.revalidate();
@@ -200,7 +195,7 @@ public class MainWindow extends JFrame{
         });
     }
 
-    private void generateNCheckBoxPanels(Integer numberOfCheckBoxPanelsToGenerate) {
+    public void generateNCheckBoxPanels(Integer numberOfCheckBoxPanelsToGenerate) {
         checkBoxPanelList = new ArrayList<>(numberOfCheckBoxPanelsToGenerate);
         for (int i = 0; i < numberOfCheckBoxPanelsToGenerate; i++) {
             CheckBoxPanel panel = new CheckBoxPanel();
@@ -286,5 +281,33 @@ public class MainWindow extends JFrame{
             System.out.println(state.getDate());
         }
 
+    }
+
+    public void resetMainWindow(){
+        closeBrowseWindows();
+        this.getContentPane().removeAll();
+        add(inputPanel());
+        add(statePanel());
+        add(checkBoxPanel());
+        add(generateBrowseWindowsButtonPanel());
+        addMosaicWindow();
+        this.revalidate();
+        this.repaint();
+
+    }
+
+    private void closeBrowseWindows() {
+        for (IWindow window : browseWindowList) {
+            window.disposeMe();
+        }
+    }
+
+    public void setCheckBoxesValues(List<Checkbox> checkBoxList) {
+        int i = 0;
+        for (CheckBoxPanel panel : checkBoxPanelList) {
+            panel.horizontalBar.setSelected(checkBoxList.get(i).isHorizontal());
+            panel.verticalBar.setSelected(checkBoxList.get(i).isVertical());
+            i++;
+        }
     }
 }

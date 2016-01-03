@@ -115,4 +115,9 @@ public class BrowseWindow extends Window {
     public String getPath() {
         return "" + jTextField.getText();
     }
+
+    @Override
+    public void disposeMe() {
+        dispose();
+    }
 }

@@ -16,4 +16,6 @@ public interface IWindow {
     boolean hasScrollPane();
 
     String getPath();
+
+    void disposeMe();
 }

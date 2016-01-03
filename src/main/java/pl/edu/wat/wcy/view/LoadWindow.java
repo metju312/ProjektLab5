@@ -1,12 +1,15 @@
 package pl.edu.wat.wcy.view;
 
 import net.miginfocom.swing.MigLayout;
+import pl.edu.wat.wcy.model.dao.CheckboxDao;
 import pl.edu.wat.wcy.model.dao.StateDao;
+import pl.edu.wat.wcy.model.entities.Checkbox;
 import pl.edu.wat.wcy.model.entities.State;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class LoadWindow extends JDialog {
 
@@ -32,8 +35,19 @@ public class LoadWindow extends JDialog {
     private JPanel generateNewStatePanel() {
         JPanel panel = new JPanel();
         JButton button = new JButton("New State");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainWindow.resetMainWindow();
+                closeLoadWindow();
+            }
+        });
         panel.add(button);
         return panel;
+    }
+
+    private void closeLoadWindow() {
+        this.dispose();
     }
 
     private JPanel generateLoadStatesPanel() {
@@ -55,7 +69,7 @@ public class LoadWindow extends JDialog {
         load.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                loadState(state);
             }
         });
 
@@ -78,17 +92,27 @@ public class LoadWindow extends JDialog {
         return panel;
     }
 
+    private void loadState(State state) {
+        mainWindow.resetMainWindow();
+        List<Checkbox> checkBoxList = generateNewCheckBoxListBasedOnState(state);
+        mainWindow.textField.setText("" + checkBoxList.size());
+        mainWindow.generateNCheckBoxPanels(checkBoxList.size());
+        mainWindow.setCheckBoxesValues(checkBoxList);
+
+
+        closeLoadWindow();
+    }
+
+    private List<Checkbox> generateNewCheckBoxListBasedOnState(State state) {
+        CheckboxDao checkboxDao = new CheckboxDao();
+        return checkboxDao.findAllCheckBoxesBasedOnState(state);
+    }
+
     private void revalidateLoadWindow() {
-        //this.removeAll();
-        //add(generateScrollPane());
-
-        //scrollPane.removeAll();
-        scrollPane.remove(listPanel);
-        scrollPane.add(generateLoadStatesPanel());
-        //scrollPane.getViewport().revalidate();
-//        revalidate();
-//        repaint();
-
+        scrollPane.getViewport().remove(listPanel);
+        scrollPane.getViewport().add(generateLoadStatesPanel());
+        this.revalidate();
+        this.repaint();
     }
 
     private void setLoadWindowLayout() {
