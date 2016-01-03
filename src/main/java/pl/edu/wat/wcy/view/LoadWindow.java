@@ -9,6 +9,7 @@ import pl.edu.wat.wcy.model.entities.State;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 public class LoadWindow extends JDialog {
@@ -98,6 +99,11 @@ public class LoadWindow extends JDialog {
         mainWindow.textField.setText("" + checkBoxList.size());
         mainWindow.generateNCheckBoxPanels(checkBoxList.size());
         mainWindow.setCheckBoxesValues(checkBoxList);
+        try {
+            mainWindow.repaintMosaic(state.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         closeLoadWindow();
