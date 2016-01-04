@@ -220,6 +220,7 @@ public class MainWindow extends JFrame{
                     generateCheckBoxesButton.setEnabled(false);
                     textField.setEnabled(false);
                     saveButton.setEnabled(true);
+                    generateBrowseWindowsButton.setEnabled(false);
                     for (CheckBoxPanel panel : checkBoxPanelList) {
                         panel.horizontalBar.setEnabled(false);
                         panel.verticalBar.setEnabled(false);

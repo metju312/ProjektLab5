@@ -1,10 +1,10 @@
 package pl.edu.wat.wcy.model.dao;
 
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
 import java.util.List;
 
 public class GenericDaoImpl<T> implements GenericDao<T> {
@@ -14,14 +14,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA");
 	EntityManager em;
-	
-//	public GenericDaoImpl() {
-//		super();
-//		em.isOpen();
-//		Type t = getClass().getGenericSuperclass();
-//		ParameterizedType pt = (ParameterizedType)t;
-//		type = (Class)pt.getActualTypeArguments()[0];
-//	}
 
     @SuppressWarnings("unchecked")
 	public GenericDaoImpl(Class<T> type) {

@@ -30,12 +30,15 @@ public class LoadWindow extends JDialog {
 
     private JScrollPane generateScrollPane() {
         scrollPane = new JScrollPane(generateLoadStatesPanel());
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         return scrollPane;
     }
 
     private JPanel generateNewStatePanel() {
         JPanel panel = new JPanel();
         JButton button = new JButton("New State");
+        ImageIcon img = new ImageIcon("src/images/newState.png");
+        button.setIcon(img);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,7 +69,7 @@ public class LoadWindow extends JDialog {
         JLabel label = new JLabel();
         label.setText(state.getDate());
 
-        JButton load = new JButton("load");
+        CustomButton load = new CustomButton("src/images/load.png");
         load.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,8 +77,7 @@ public class LoadWindow extends JDialog {
             }
         });
 
-
-        JButton delete = new JButton("delete");
+        CustomButton delete = new CustomButton("src/images/delete.png");
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -140,7 +142,7 @@ public class LoadWindow extends JDialog {
 
     private void setLoadWindowValues() {
         //setLocationRelativeTo(null);
-        setSize(340, 400);
+        setSize(286, 400);
     }
 
 

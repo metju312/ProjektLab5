@@ -12,7 +12,6 @@ public class CheckboxDao extends GenericDaoImpl<Checkbox> {
     }
 
     public List<Checkbox> findAllCheckBoxesBasedOnState(State state) {
-        //return em.createQuery("from Checkbox c where c.state = :t", Checkbox.class).setParameter("t",stateId).getResultList();
         return em.createQuery("from Checkbox c where c.state = :t").setParameter("t",state).getResultList();
     }
 
